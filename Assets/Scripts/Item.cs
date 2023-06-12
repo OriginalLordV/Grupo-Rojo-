@@ -54,30 +54,4 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void ItemUsage()
-{
-    if (type == "Key")
-    {
-        if (equipped)
-        {
-            gameObject.SetActive(false);
-            Inventory playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-
-            playerInventory.collectedKeys++; // Incrementar el contador de llaves recolectadas
-
-            if (playerInventory.collectedKeys == playerInventory.totalKeysNeeded)
-            {
-                GameObject.FindGameObjectWithTag("Door").GetComponent<Door>().OpenDoor();
-            }
-            else
-            {
-                int remainingKeys = playerInventory.totalKeysNeeded - playerInventory.collectedKeys;
-                Debug.Log("Faltan " + remainingKeys + " llaves para abrir la puerta.");
-            }
-        }
-    }
-}
-
-
-
 }

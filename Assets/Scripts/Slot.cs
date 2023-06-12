@@ -27,19 +27,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         slotIconGameObject.GetComponent<Image>().sprite = icon;
     }
 
-    public void UseItem()
-    {
-        if (item != null)
-        {
-            item.GetComponent<Item>().ItemUsage();
-        }
-    }
+
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         if (item != null)
         {
-            UseItem();
+            
             inventory.collectedKeys++; // Incrementar el contador de llaves recolectadas
         }
     }
