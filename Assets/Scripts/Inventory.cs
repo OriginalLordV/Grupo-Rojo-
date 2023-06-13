@@ -31,8 +31,7 @@ public class Inventory : MonoBehaviour
         }
 
         inventoryGameObject.SetActive(true);
-        UpdateInventoryText();
-       
+        keysNeededText.text = "Faltan " + (totalKeysNeeded - collectedKeys) + " llaves para abrir la puerta.";
     }
 
     private void OnTriggerEnter(Collider other)

@@ -1,10 +1,7 @@
- using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    
     public int ID;
     public string type;
     public string description;
@@ -14,15 +11,15 @@ public class Item : MonoBehaviour
     public bool pickedUp;
     [HideInInspector]
     public bool equipped;
-    [HideInInspector]   
+    [HideInInspector]
     public GameObject keysManager;
-    [HideInInspector]   
+    [HideInInspector]
     public GameObject keys;
-    
+
     public bool playersKeys;
 
-    private void Start(){
-
+    private void Start()
+    {
         keysManager = GameObject.FindWithTag("KeysManager");
 
         if (!playersKeys)
@@ -33,25 +30,48 @@ public class Item : MonoBehaviour
             {
                 if (keysManager.transform.GetChild(i).gameObject.GetComponent<Item>().ID == ID)
                 {
-                    keys=keysManager.transform.GetChild(i).gameObject;
+                    keys = keysManager.transform.GetChild(i).gameObject;
                 }
             }
         }
     }
 
-    private void Update(){
-
+    private void Update()
+    {
         if (equipped)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 equipped = false;
             }
-            if (equipped==false)
+            if (!equipped)
             {
                 gameObject.SetActive(false);
             }
         }
     }
 
+    public void ItemUsage()
+    {
+        if (type == "Key")
+        {
+            if (equipped)
+            {
+                gameObject.SetActive(false);
+                Inventory playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+
+                playerInventory.collectedKeys++; // Incrementar el contador de llaves recolectadas
+
+                if (playerInventory.collectedKeys == playerInventory.totalKeysNeeded)
+                {
+                    GameObject.FindGameObjectWithTag("Door").GetComponent<Door>().OpenDoor();
+                }
+                else
+                {
+                    int remainingKeys = playerInventory.totalKeysNeeded - playerInventory.collectedKeys;
+                   
+                }
+            }
+        }
+    }
 }
