@@ -34050,7 +34050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: Player
   totalKeysNeeded: 3
-  keyRequestTag: KeysRequest
+  keyRequestTag: KeyRequest
   nextScene: Scene02
 --- !u!65 &1834697290
 BoxCollider:
